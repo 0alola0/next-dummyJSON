@@ -2,4 +2,5 @@ export {default as Header} from "./layouts/Header"
 export {default as LoadingSkeleton} from "./skeletons/LoadingSkeleton"
 export {default as Error} from "./skeletons/Error"
 export {default as PostCard} from "./cards/PostCards"
-
+export {default as PostShowcase} from "./layouts/PostShowcase"
+export {default as CommentCard} from "./cards/CommentCard"

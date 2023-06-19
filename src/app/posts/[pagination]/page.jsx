@@ -7,15 +7,20 @@ const getPostsPage = async (page, skip) => {
   const response = await axios.get(
     `https://dummyjson.com/posts?limit=${page}&skip=${skip}`
   );
+  const data = response.data;
+  //ფეიჯის ყველა პოსტის აიდით გამოიძახება იუზერის ფუნქცია სადაც id-ს მიხედვით იუზერ დატა ემატება თითო პოსტის ობიექტს. ისე სხვანაირად სახელი და გვარი არცერთ api-ს გამოქონდა პოსტთან ერთად:დ
+  const usersDataPromises = data.posts.map((post) => getUsersData(post.userId));
+  const usersData = await Promise.all(usersDataPromises);
+  data.posts.forEach((post, index) => {
+    post.userData = usersData[index];
+  });
+  return data;
+};
+
+const getUsersData = async (id) => {
+  const response = await axios.get(`https://dummyjson.com/users/${id}`);
   return response.data;
 };
-// const getUsersData = async (id) => {
-//     const response = await axios.get(
-//         `https://dummyjson.com/users/${id}`
-//     );
-//     return response.data;
-// }
-//უსერების დაფეჩვა ხდება ცალკე და მერე find-ით შეიძლება გაყოლება რო სერვერსაიდად დარჩეს
 
 export default async function PaginationPosts({ params }) {
   //ეს ცვლადი შეიძლება მომავალში დინამიურად გაიწეროს ინფუთით, ეხლა იყოს 50:დ
@@ -28,8 +33,6 @@ export default async function PaginationPosts({ params }) {
     return renderErrorMessage();
   }
   const posts = await getPostsPage(limit, skip);
-
-
   //გვერდების დათვლა. სვავს უახლოეს(მაღალ) მთელ რიცხვს
   const pageAmount = Math.ceil(posts.total / itemsOnPage);
   const pageNumbers = Array.from(
@@ -40,7 +43,6 @@ export default async function PaginationPosts({ params }) {
     return renderErrorMessage();
   }
 
-
   return (
     <div>
       {pageNumbers.map((page) => (
@@ -48,21 +50,11 @@ export default async function PaginationPosts({ params }) {
           {page}
         </Link>
       ))}
-      {posts.posts.map(async (post) => {
-        return (
-          <div key={post.id}>
-            <PostCard post={post}/>
-          </div>
-        );
-      })}
-      {/* {posts.posts.map((post) => (
-        //getSingle user should be called here so that i can send it the first and last name
-        <div key={post.id}> 
-            <h1 >{post.title}</h1>
-            <span>{user.firstName}</span>
-            <span>{user.lastName}</span>
+      {posts.posts.map((post) => (
+        <div key={post.id}>
+          <PostCard post={post} user={post.userData}/>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 }

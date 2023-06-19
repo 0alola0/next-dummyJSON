@@ -1,13 +1,20 @@
+import { CommentCard, PostShowcase } from "@/app/components";
 import axios from "axios";
 
 const getSinglePost = async (id) => {
   const response = await axios.get(`https://dummyjson.com/posts/${id}`);
+  const usersData = await getUsersData(response.data.userId);
+  response.data.userData = usersData;
   return response.data;
 };
 const getSinglePostComments = async (id) => {
   const response = await axios.get(
-    `https://dummyjson.com/posts/${id}/comments`
+    `https://dummyjson.com/comments/post/${id}`
   );
+  return response.data;
+};
+const getUsersData = async (id) => {
+  const response = await axios.get(`https://dummyjson.com/users/${id}`);
   return response.data;
 };
 
@@ -16,8 +23,11 @@ export default async function SinglePost({ params }) {
   console.log(comments)
   return (
     <div>
-      {post.id},
       {comments.total}
+      <PostShowcase post={post}/>
+      {comments.comments.map((comment) => (
+        <CommentCard comment={comment}/>
+      ))}
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-
-const PostCards = ({ post }) => {
+const PostCards = ({ post, user }) => {
   const randomSrc = imageLinks[Math.floor(Math.random() * imageLinks.length)];
 
   return (
@@ -14,11 +13,14 @@ const PostCards = ({ post }) => {
       </Link>
       <h3>{post.title}</h3>
       <div className="">
-        <figure>
-          <img style={{ width: "20px" }} src="/next.svg" alt="" />
-        </figure>
-
-        <Link href={`/users/${post.userId}`}>dog doggo</Link>
+        <Link href={`/users/${post.userId}`}>
+          <figure>
+            <img style={{ width: "20px" }} src="/next.svg" alt="" />
+          </figure>
+          <span>
+            {user.firstName} {user.lastName}
+          </span>
+        </Link>
       </div>
       <div>
         <p>{post.body}</p>

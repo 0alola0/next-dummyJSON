@@ -23,7 +23,7 @@ const getUsersData = async (id) => {
 };
 
 export default async function PaginationPosts({ params }) {
-  //ეს ცვლადი შეიძლება მომავალში დინამიურად გაიწეროს ინფუთით, ეხლა იყოს 50:დ
+  //ეს ცვლადი შეიძლება მომავალში დინამიურად გაიწეროს ინფუთით, ეხლა იყოს 12:დ
   const itemsOnPage = 12;
   const currentPage = +params.pagination;
   const skip = (+params.pagination - 1) * itemsOnPage;

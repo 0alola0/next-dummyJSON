@@ -4,12 +4,16 @@ export default function Header() {
   return (
     <header>
       <div className="logo">
+        <Link href="/posts/1">
+          <img style={{ width: "24px" }} src="/next.svg" alt="" />
+          <span>HOME</span>
+        </Link>
         <Link href="/posts">
-          <img style={{width:"24px"}} src="/next.svg" alt="" />
+          <img style={{ width: "24px" }} src="/next.svg" alt="" />
           <span>ALL POSTS</span>
         </Link>
         <Link href="/users">
-          <img style={{width:"24px"}} src="/next.svg" alt="" />
+          <img style={{ width: "24px" }} src="/next.svg" alt="" />
           <span>ALL DOGS</span>
         </Link>
       </div>

@@ -20,13 +20,12 @@ const getUsersData = async (id) => {
 
 export default async function SinglePost({ params }) {
   const [post, comments] = await Promise.all([getSinglePost(params.id), getSinglePostComments(params.id)] )
-  console.log(comments)
   return (
     <div>
       {comments.total}
       <PostShowcase post={post}/>
       {comments.comments.map((comment) => (
-        <CommentCard comment={comment}/>
+        <CommentCard key={comment.id} comment={comment}/>
       ))}
     </div>
   );

@@ -9,7 +9,6 @@ const getUsers = async () => {
 
 export default async function AllUsers() {
   const users = await getUsers();
-  console.log(users.users)
   if (!users) {
     return <div>user does not exist</div>;
   }

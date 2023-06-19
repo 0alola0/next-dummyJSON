@@ -17,19 +17,22 @@ export default async function SingleUser({ params }) {
   ]);
 
   return (
-    <div>
-        <div className="userHeader">
+    <div className="user_page">
+      <div className="userHeader">
         <figure>
-            <img style={{ width: "50px" }} src="/next.svg" alt="" />
-          </figure>
-          <span>
-            {user.firstName} {user.lastName}
-          </span>
-        </div>
-      <h1>this is me {user.firstName}</h1>
-      {posts.posts.map((post) => (
-        <PostCard post={post} user={user} />
-      ))}
+          <img src="/next.svg" alt="" />
+        </figure>
+        <span>
+          {user.firstName} {user.lastName}
+        </span>
+      </div>
+      <div className="container">
+        {posts.posts.map((post) => (
+          <div key={post.id}>
+            <PostCard post={post} user={user} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

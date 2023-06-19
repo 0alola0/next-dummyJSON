@@ -7,23 +7,25 @@ const PostCards = ({ post, user }) => {
   return (
     <article className="postCard">
       <Link href={`/posts/single/${post.id}`}>
-        <figure>
-          <img style={{ width: "300px" }} src={randomSrc} alt="" />
+        <figure className="main_image">
+          <img src={randomSrc} alt="" />
         </figure>
       </Link>
-      <h3>{post.title}</h3>
-      <div className="">
-        <Link href={`/users/${post.userId}`}>
-          <figure>
-            <img style={{ width: "20px" }} src="/next.svg" alt="" />
-          </figure>
-          <span>
-            {user.firstName} {user.lastName}
-          </span>
-        </Link>
-      </div>
-      <div>
-        <p>{post.body}</p>
+      <div className="post_body">
+        <h3>{post.title}</h3>
+        <div className="individual">
+          <Link href={`/users/${post.userId}`}>
+            <figure>
+              <img src="/next.svg" alt="" />
+            </figure>
+            <span>
+              {user.firstName} {user.lastName}
+            </span>
+          </Link>
+        </div>
+        <div>
+        <p>{post.body.length > 150 ? `${post.body.substring(0, 150)}...` : post.body}</p>
+        </div>
       </div>
     </article>
   );

@@ -11,10 +11,10 @@ const PostShowcase = ({ post }) => {
         />
       </figure>
       <h2>{post.title}</h2>
-      <div className="">
+      <div className="individual">
         <Link href={`/users/${post.userId}`}>
           <figure>
-            <img style={{ width: "20px" }} src="/next.svg" alt="" />
+            <img src="/next.svg" alt="" />
           </figure>
           <span>
             {post.userData.firstName} {post.userData.lastName}

@@ -24,7 +24,7 @@ const getUsersData = async (id) => {
 
 export default async function PaginationPosts({ params }) {
   //ეს ცვლადი შეიძლება მომავალში დინამიურად გაიწეროს ინფუთით, ეხლა იყოს 50:დ
-  const itemsOnPage = 10;
+  const itemsOnPage = 12;
   const currentPage = +params.pagination;
   const skip = (+params.pagination - 1) * itemsOnPage;
   const limit = itemsOnPage;
@@ -44,17 +44,22 @@ export default async function PaginationPosts({ params }) {
   }
 
   return (
-    <div>
-      {pageNumbers.map((page) => (
-        <Link key={page} href={`/posts/${page}`}>
-          {page}
-        </Link>
-      ))}
-      {posts.posts.map((post) => (
-        <div key={post.id}>
-          <PostCard post={post} user={post.userData}/>
-        </div>
-      ))}
+    <div className="intro_posts">
+      <div className="container">
+        {posts.posts.map((post) => (
+          <div key={post.id}>
+            <PostCard post={post} user={post.userData} />
+          </div>
+        ))}
+      </div>
+
+      <div className="pages">
+        {pageNumbers.map((page) => (
+          <Link key={page} href={`/posts/${page}`}>
+            <p className={currentPage === page? "active": ""}>{page}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

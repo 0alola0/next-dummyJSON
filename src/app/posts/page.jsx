@@ -1,6 +1,7 @@
 //ამ ვარიანტში არ არის პაგინაცია, უბრალოდ ყველა პოსტია ჩატვირთული სატესტოდ. რორამე პირველ ფეიჯად გადავაკეთებ პაგინაცია თუა სწორი ვარიანტი
 
 import axios from 'axios';
+import Link from 'next/link';
 
 const getPosts = async () => {
     const response = await axios.get('https://dummyjson.com/posts?limit=100&select=title,reactions,userId');
@@ -9,7 +10,6 @@ const getPosts = async () => {
 
 export default async function Posts() {
   const posts = await getPosts();
-  console.log(posts.posts)
   if (!posts) {
     return <div>Loading...</div>;
   }
@@ -17,7 +17,7 @@ export default async function Posts() {
   return (
     <div>
       {posts.posts.map((post) => (
-        <h1 key={post.id}>{post.title}</h1>
+        <Link key={post.id} href={`/posts/single/${post.id}`}><h1>{post.title}</h1></Link>
       ))}
     </div>
   );

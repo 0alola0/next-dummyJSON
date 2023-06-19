@@ -1,14 +1,12 @@
-import { redirect } from 'next/navigation';
+import Link from "next/link";
 
 export default function Home() {
-  redirect('/posts/1')
 
   return (
-    <main>
-      {/* 
-      2 წამით ერორს აგდებს რედირექტის, 
-      მაინც დავტოვებ იმიტორო
-      კოდი რომ არსებობდეს აქ ჩავწერდი :დ */}
+    <main style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
+      <h1>WELCOME TO THE BLOG</h1>
+      <h3>the main page is under construction</h3>
+      <Link href="/posts/1">relocate me to the blog</Link>
     </main>
   )
 }

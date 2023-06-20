@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const useAxiosPost = (url, { method, body } = {}) => {
-  const [data, setData] = useState([]);
+  const [multiData, setMultiData] = useState([]);
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,7 +16,6 @@ const useAxiosPost = (url, { method, body } = {}) => {
     })
       .then((response) => {
         setResponse(response.data);
-        console.log(response.data, "tis")
       })
       .catch((err) => {
         setError(err);
@@ -35,7 +34,7 @@ const useAxiosPost = (url, { method, body } = {}) => {
       data: JSON.stringify(newData),
     })
       .then((response) => {
-        setData((prevData) => [...prevData, response.data]); 
+        setMultiData((prevData) => [...prevData, response.data]); 
     })
       .catch((err) => {
         setError(err);
@@ -45,7 +44,7 @@ const useAxiosPost = (url, { method, body } = {}) => {
       });
   }
 
-  return { request, appendData, data, response, error, loading };
+  return { request, appendData, multiData, response, error, loading };
 };
 
 export default useAxiosPost;

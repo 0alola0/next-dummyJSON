@@ -9,6 +9,7 @@ const getPostsPage = async (page, skip) => {
   );
   const data = response.data;
   //ფეიჯის ყველა პოსტის აიდით გამოიძახება იუზერის ფუნქცია სადაც id-ს მიხედვით იუზერ დატა ემატება თითო პოსტის ობიექტს. ისე სხვანაირად სახელი და გვარი არცერთ api-ს გამოქონდა პოსტთან ერთად:დ
+  //ესე დამაპვის გამო ძალიან ბევრი რიქუესთი ხდება ერთდროულად და თუ ძალიან გადავტვირთე ედიტებით 429-ს აგდებს. სხვა ლოგიკა ვერ მოვიფიქრე სერვერის მხარეს, რომ საერთო ობიექტი შემექმნა სადაც პოსტიც და იუზერიც იქნებოდა
   const usersDataPromises = data.posts.map((post) => getUsersData(post.userId));
   const usersData = await Promise.all(usersDataPromises);
   data.posts.forEach((post, index) => {

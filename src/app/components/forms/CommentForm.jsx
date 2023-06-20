@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import CommentCard from "../cards/CommentCard";
 
 const CommentForm = ({postID}) => {
-  const { appendData, loading, error, data } = useAxiosPost(
+  const { appendData, loading, error, multiData } = useAxiosPost(
     "https://dummyjson.com/comments/add"
   );
   const [commentText, setCommentText] = useState("");
@@ -19,9 +19,10 @@ const CommentForm = ({postID}) => {
     appendData(newData);
   };
 
+
   return (
     <>
-      {data?.map((comment, index) => (
+      {multiData?.map((comment, index) => (
         <CommentCard key={index} comment={comment} newComment={true}/>
       ))}
 

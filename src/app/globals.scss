@@ -8,7 +8,6 @@ header {
   max-width: 1120px;
   padding-inline: 40px;
   padding-block: 30px;
-  box-sizing: border-box;
   .logo {
     display: flex;
     gap: 30px;
@@ -28,6 +27,12 @@ header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
   article {
     border: 1px solid #d9d9d9;
     box-shadow: 10px 10px 20px #f2f2f2, -10px -10px 20px #ffffff;
@@ -111,12 +116,48 @@ header {
     }
   }
 }
+.comment_box {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-inline: 26px;
+  padding-block: 19px;
+  margin-block: 20px;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  border: 1px solid #e6e4e4;
+  box-shadow: 8px 8px 16px #ebebeb, -8px -8px 16px #ffffff;
+  .upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+    }
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      img {
+        width: 15px;
+      }
+    }
+  }
+
+  p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
 .intro_showcase {
   margin: 0 auto;
   max-width: 1200px;
   padding-inline: 40px;
   padding-block: 30px;
-  box-sizing: border-box;
   figure {
     margin: 0;
     width: 100%;
@@ -152,6 +193,44 @@ header {
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
+    }
+  }
+}
+.form_container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-inline: 40px;
+  padding-block: 30px;
+  h4 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+  }
+  form{
+    max-width: 411px;
+    .form_item{
+      width: 100%;
+      input{
+        margin-top: 24px;
+        width: 100%;
+        border: 1px solid #000;
+        padding-block: 10px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        &.text_input{
+          padding-bottom: 150px;
+        }
+      }
+    }
+    button{
+      margin-top: 34px;
+      width: 100%;
+      background-color: #000;
+      border: none;
+      text-align: center;
+      color: #fff;
+      padding-block: 15px;
     }
   }
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { PostCard } from "@/app/components";
+import Link from "next/link";
 //პაგინაციის გვერდისგან განსხვავებით აქ ორი fetch ერთმანეთზე დამოკიდებული არაა და ამიტომ შიგნითვე ვიძახებ ერთდრაულად
 const getSingleUser = async (id) => {
   const response = await axios.get(`https://dummyjson.com/users/${id}`);
@@ -11,28 +12,33 @@ const getPostsByUser = async (id) => {
 };
 
 export default async function SingleUser({ params }) {
-  const [user, posts] = await Promise.all([
-    getSingleUser(params.id),
-    getPostsByUser(params.id),
-  ]);
 
-  return (
-    <div className="user_page">
-      <div className="userHeader">
-        <figure>
-          <img src="/next.svg" alt="" />
-        </figure>
-        <span>
-          {user.firstName} {user.lastName}
-        </span>
+    const [user, posts] = await Promise.all([
+      getSingleUser(+params.id),
+      getPostsByUser(+params.id),
+    ]);
+
+    if (!user) {
+      return <div>user does not exist</div>;
+    }
+
+    return (
+      <div className="user_page">
+        <div className="userHeader">
+          <figure>
+            <img src="/next.svg" alt="" />
+          </figure>
+          <span>
+            {user.firstName} {user.lastName}
+          </span>
+        </div>
+        <div className="container">
+          {posts.posts.map((post) => (
+            <div key={post.id}>
+              <PostCard post={post} user={user} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="container">
-        {posts.posts.map((post) => (
-          <div key={post.id}>
-            <PostCard post={post} user={user} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    );
 }

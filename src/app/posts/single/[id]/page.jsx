@@ -1,4 +1,4 @@
-import { CommentCard, PostShowcase } from "@/app/components";
+import { CommentCard, CommentForm, PostShowcase } from "@/app/components";
 import axios from "axios";
 
 const getSinglePost = async (id) => {
@@ -19,14 +19,14 @@ const getUsersData = async (id) => {
 };
 
 export default async function SinglePost({ params }) {
-  const [post, comments] = await Promise.all([getSinglePost(params.id), getSinglePostComments(params.id)] )
+  const [post, comments] = await Promise.all([getSinglePost(+params.id), getSinglePostComments(+params.id)] )
   return (
     <div>
-      {comments.total}
       <PostShowcase post={post}/>
       {comments.comments.map((comment) => (
         <CommentCard key={comment.id} comment={comment}/>
       ))}
+      <CommentForm postID={+params.id}/>
     </div>
   );
 }

@@ -29,6 +29,7 @@ export default async function PaginationPosts({ params }) {
   const skip = (+params.pagination - 1) * itemsOnPage;
   const limit = itemsOnPage;
   //ერორის მაგივრად რედირექციის ლინკს ვუგდებ, რორამე პირველზე გადავა:დ
+  //დანარჩენ ფეიჯებზე ყველგან ჩვეულებრივი ნექსთის error boundry მოქმედებს რედირექციის ლინკებით
   if (isNaN(currentPage)) {
     return renderErrorMessage();
   }

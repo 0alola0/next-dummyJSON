@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Link from 'next/link';
 
 const getUsers = async () => {
     const response = await axios.get('https://dummyjson.com/users', 
@@ -9,14 +10,10 @@ const getUsers = async () => {
 
 export default async function AllUsers() {
   const users = await getUsers();
-  if (!users) {
-    return <div>user does not exist</div>;
-  }
-
   return (
     <div>
       {users.users.map((user) => (
-        <h1 key={user.id}>{user.firstName}</h1>
+        <Link href={`/users/${user.id}`} key={user.id}><h1>{user.firstName}</h1></Link>
       ))}
     </div>
   );
